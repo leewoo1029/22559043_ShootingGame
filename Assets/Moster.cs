@@ -9,16 +9,20 @@ public class Moster : MonoBehaviour
     
     Vector3 direct = Vector3.down;
 
-
+    public GameObject prefabsExplosions;
     private void OnCollisionEnter(Collision collision)
     {
+        GameObject explosion0bj = Instantiate(prefabsExplosions);
+        explosion0bj.transform.position = transform.position;
+        
         Destroy(collision.gameObject);
-
         Destroy(gameObject);
     }
+
     // Start is called before the first frame update
     void Start()
     {
+        
         int rndNum = Random.Range(0, 10);
         if (rndNum % 3 == 0) 
         {
