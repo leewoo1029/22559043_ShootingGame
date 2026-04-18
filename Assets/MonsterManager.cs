@@ -37,5 +37,5 @@ public class MonsterManager : MonoBehaviour
             createTime = Random.Range(minTime, maxTime);
             nowTime = 0;
         }
-    }
+    } 
 }
