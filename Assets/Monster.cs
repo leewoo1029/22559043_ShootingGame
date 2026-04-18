@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Moster : MonoBehaviour
+public class Monster : MonoBehaviour
 {
     public float spd = 1.0f;
     public GameObject target;
@@ -33,8 +33,8 @@ public class Moster : MonoBehaviour
 
 
             Destroy(collision.gameObject);
-            Destroy(gameObject);
-        }
+         }
+        Destroy(gameObject);
     }
 
     // Start is called before the first frame update
@@ -53,5 +53,6 @@ public class Moster : MonoBehaviour
     void Update()
     {
         transform.position = transform.position + direct * spd * Time.deltaTime;
+
     }
 }
