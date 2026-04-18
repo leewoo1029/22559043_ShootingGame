@@ -12,11 +12,29 @@ public class Moster : MonoBehaviour
     public GameObject prefabsExplosions;
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject explosion0bj = Instantiate(prefabsExplosions);
-        explosion0bj.transform.position = transform.position;
-        
-        Destroy(collision.gameObject);
-        Destroy(gameObject);
+        if(collision.gameObject.tag == "Bullet")
+        {
+            GameObject gameManager = GameObject.Find("ScoreManager");
+            ScoreManager scoreManager = gameManager.GetComponent<ScoreManager>();
+            scoreManager.nowScore++;
+            scoreManager.nowScoreUI.text = "Now Score : " + scoreManager.nowScore;
+            
+            
+            if(scoreManager.nowScore > scoreManager.bestScore)
+            {
+                scoreManager.bestScore = scoreManager.nowScore;
+                scoreManager.bestScoreUI.text = "Best Score : " + scoreManager.bestScore;
+
+                PlayerPrefs.SetInt("BestScore", scoreManager.nowScore);
+            }
+            
+            GameObject explosion0bj = Instantiate(prefabsExplosions);
+            explosion0bj.transform.position = transform.position;
+
+
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
     }
 
     // Start is called before the first frame update
