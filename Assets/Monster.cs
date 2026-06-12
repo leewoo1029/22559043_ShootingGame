@@ -14,6 +14,10 @@ public class Monster : MonoBehaviour
     {
         if(collision.gameObject.tag == "Bullet")
         {
+
+            Debug.Log("몬스터 피격");
+
+
             GameObject gameManager = GameObject.Find("ScoreManager");
             ScoreManager scoreManager = gameManager.GetComponent<ScoreManager>();
             scoreManager.nowScore++;
@@ -31,10 +35,21 @@ public class Monster : MonoBehaviour
             GameObject explosion0bj = Instantiate(prefabsExplosions);
             explosion0bj.transform.position = transform.position;
 
+            MonsterDropper dropper = GetComponent<MonsterDropper>();
+
+            if (dropper == null)
+            {
+                Debug.Log("MonsterDropper 없음");
+            }
+            else
+            {
+                Debug.Log("MonsterDropper 찾음");
+                dropper.Drop();
+            }
 
             Destroy(collision.gameObject);
-         }
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 
     // Start is called before the first frame update
@@ -42,7 +57,7 @@ public class Monster : MonoBehaviour
     {
         
         int rndNum = Random.Range(0, 10);
-        if (rndNum % 3 == 0) 
+        if (rndNum % 3 == 0 && target != null)
         {
             direct = target.transform.position - transform.position;
             direct.Normalize();

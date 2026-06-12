@@ -13,6 +13,7 @@ public class DropItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         // Player 태그인지 확인
         if (!other.CompareTag("Player")) return; 
         // PlayerInventory.Instance.AddItem() 호출
@@ -22,6 +23,30 @@ public class DropItem : MonoBehaviour
         // 획득 성공 시 Destroy(gameObject)
         if (added)
         {
+            Destroy(gameObject);
+        }
+
+        Debug.Log("포션 충돌 : " + other.name);
+
+        if (!other.CompareTag("Player"))
+        {
+            Debug.Log("Player 태그 아님");
+            return;
+        }
+
+        Debug.Log("Player 태그 확인");
+
+        if (PlayerInventory.Instance == null)
+        {
+            Debug.Log("PlayerInventory.Instance 없음");
+            return;
+        }
+
+        Debug.Log("아이템 추가 결과 : " + added);
+
+        if (added)
+        {
+            Debug.Log("포션 획득 성공");
             Destroy(gameObject);
         }
     }

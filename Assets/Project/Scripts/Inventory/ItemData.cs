@@ -20,3 +20,5 @@ public class ItemData : ScriptableObject
     public bool canStack = true;
     public int maxStack = 99;
 }
+
+

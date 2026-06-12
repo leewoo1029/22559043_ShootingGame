@@ -15,11 +15,27 @@ public class MonsterDropper : MonoBehaviour
     public DropTable[] dropTables;
 
     public void Drop()
-    {  
-        if (dropPrefab == null || dropTables == null) return; 
+    {
+
+        Debug.Log("Drop 실행됨");
+
+        if (dropPrefab == null)
+        {
+            Debug.Log("dropPrefab 비어있음");
+            return;
+        }
+
+        if (dropTables == null)
+        {
+            Debug.Log("dropTables 비어있음");
+            return;
+        }
+
+
+        if (dropPrefab == null || dropTables == null) return;
 
         foreach (DropTable table in dropTables)
-        { 
+        {
             if (table.itemData == null) continue;
             if (Random.value > table.dropRate) continue;
 
@@ -49,12 +65,10 @@ public class MonsterDropper : MonoBehaviour
             }
 
         }
+        Debug.Log("드랍 시도");
+
+        Instantiate(dropPrefab, transform.position, Quaternion.identity);
+
+        Debug.Log("드랍 생성 완료");
     }
-
-
-
-
-
-
-
 }
